@@ -44,7 +44,7 @@
 		}
 		public function read_All(){
 			$this->db->trans_start();
-			$data = $this->db->query('SELECT * FROM dv_users');
+			$data = $this->db->query('SELECT dvu.name,dvr.name FROM dv_users as dvu JOIN dv_users_roles_has_dv_users as uhasr ON dvu.id = uhasr.dv_users_id JOIN dv_users_roles as dvr ON uhasr.dv_users_roles_id = dvr.id ');
 			$this->db->trans_complete();
 			return json_encode($data->result());
 		}
