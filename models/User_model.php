@@ -44,8 +44,14 @@
 		}
 		public function read_All(){ //displaing dv_user name and dv_user_role name
 			$this->db->trans_start();
-			$data = $this->db->query('SELECT dvu.name,dvr.name FROM dv_users as dvu JOIN dv_users_roles_has_dv_users as uhasr ON dvu.id = uhasr.dv_users_id JOIN dv_users_roles as dvr ON uhasr.dv_users_roles_id = dvr.id ');
+			$data = $this->db->query('SELECT dvu.name, dvr.name FROM dv_users as dvu JOIN dv_users_roles_has_dv_users as uhasr ON dvu.id = uhasr.dv_users_id JOIN dv_users_roles as dvr ON uhasr.dv_users_roles_id = dvr.id ');
 			$this->db->trans_complete();
-			return json_encode($data->result());
+			ob_start();
+			echo '<pre>';
+		    var_dump(json_encode($data->result()));
+		    echo '</pre>';
+		    $content = ob_get_contents();
+		    ob_end_clean();
+		    return $content;
 		}
 }

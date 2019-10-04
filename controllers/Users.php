@@ -22,8 +22,8 @@
 		}
 
 		public function read(){
-			$data = json_encode($this->User_model->read_All());
-			var_dump($data);
+			$data = $this->User_model->read_All();
+			echo json_encode($data);
 		}
 
 		public function update(){
@@ -36,6 +36,6 @@
 
 		public function read_roles(){
 			$data = json_encode($this->Role_model->read_role()); 
-			var_dump($data);
+			echo $data;
 		}
 	}
