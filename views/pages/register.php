@@ -25,41 +25,8 @@
 
 	<div id="Roles"></div>
 	<BR>
-
 	<button type="submit" class="btn btn-primary">Submit</button>
 		<script type="text/javascript">
- 	 		$.ajax({
-  			  type: 'POST',
-			  contentType: "application/json;charset=ISO-8859-15",
-			  url: "<?php echo base_url(); ?>Users/read_roles",
-			  dataType: 'json',
-			  success: function(data){
-			  	let objRoles = JSON.parse(data);
-				$(objRoles).each(function(index){
-			  		let divR = $('<div/>');
-			  		divR.addClass("custom-control custom-checkbox");
-
-			  		let checkR = $('<input/>');
-			  		checkR.attr('type','checkbox');
-			  		checkR.addClass("custom-control-input");
-			  		checkR.attr('id',index);
-
-			  		let labelR = $('<label></label>');
-			  		labelR.addClass("custom-control-label");
-			  		labelR.attr('for', index);
-			  		labelR.text(objRoles[index].name);
-
-			  		divR.append(checkR);
-			  		divR.append(labelR);
-
-			  		divR.appendTo("#Roles");
-			  	});
-			  	
-			  },  
-			  error: function(e) {
-			      console.log("error: ",e);
-			  }
-			});
+			getRoles();
  	 	</script>
- 	 	<p id='testP'></p>
 <?php echo form_close(); ?>

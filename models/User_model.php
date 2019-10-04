@@ -48,10 +48,10 @@
 			$this->db->trans_complete();
 			ob_start();
 			echo '<pre>';
-		    var_dump(json_encode($data->result()));
+		    var_dump($data->result());
 		    echo '</pre>';
 		    $content = ob_get_contents();
 		    ob_end_clean();
-		    return $content;
+		    return json_encode($data->result());
 		}
 }
