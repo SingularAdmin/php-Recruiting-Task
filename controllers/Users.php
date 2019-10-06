@@ -1,12 +1,14 @@
 <?php 
 	class Users extends CI_Controller{
-
+		public function testinsert(){
+			$this->User_model->insertwp();
+		}
 		public function create(){
 			$data['title'] = 'Sign Up';
 
 			$this->form_validation->set_rules('name','Name','required');
 			$this->form_validation->set_rules('username','Username','required');
-			$this->form_validation->set_rules('password','Password','required');
+			$this->form_validation->set_rules('passwd','Password','required');
 			$this->form_validation->set_rules('passconf','Password Confirmation', 'required');
 			$this->form_validation->set_rules('email','Email','required');
 		
@@ -15,10 +17,9 @@
 				$this->load->view('pages/register', $data);
 				$this->load->view('templates/footer');
 			}else{
-				die('Continue');
+				redirect("show_users");
+				return $data = $this->User_model->create_user();
 			}
-			
-			$this->User_model->create_user();
 		}
 
 		public function read(){

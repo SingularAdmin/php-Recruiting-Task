@@ -5,16 +5,22 @@
 		}
 
 		public function create_user(){
+			$this->db->trans_start();
+			$this->db->insert('wp_users', array('systemUsers' => 0));
+			$lastID = $this->db->insert_id();
 			$data = array(
 				'name' => $this->input->post('name'),
 				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password'),
-				'email' => $this->input->post('email')
+				'password' => $this->input->post('passwd'),
+				'email' => $this->input->post('email'),
+				'wp_users_ID' => $lastID
 			);
-			$this->db->trans_start();
 			$data = $this->db->insert('dv_users',$data);
+
+			$this->db->insert('dv_users_roles_has_dv_users',array('dv_users_roles_id' => 1 ,
+				'dv_users_id' => $lastID) );
 			$this->db->trans_complete();
-			return json_encode($data->result());
+			return json_encode($data);
 		}
 
 		public function read_user($id){
@@ -51,7 +57,7 @@
 			if($query->num_rows() > 0){
 				return json_encode($query->result());
 			}else{
-				return false;
+				return json_encode("No data in the table");
 			}
 			$this->db->trans_complete();
 		}

@@ -8,7 +8,7 @@
 	</div>
 	<div class="form-group">
 		<span class="label label-default">Όνομα Χρήστη</span>
-		<input type="text" class="form-control" name="usernames" placeholder="Όνομα Χρήστη">
+		<input type="text" class="form-control" name="username" placeholder="Όνομα Χρήστη">
 	</div>
 	<div class="form-group">
 		<span class="label label-primary">Κωρικός</span>
@@ -16,7 +16,7 @@
 	</div>
 	<div class="form-group">
 		<span class="label">Επανάληψη κωδικού</span>
-		<input type="Password" class="form-control" name="passwd1" placeholder="Επανάληψη κωδικού">
+		<input type="Password" class="form-control" name="passconf" placeholder="Επανάληψη κωδικού">
 	</div>
 	<div class="form-group">
 		<span class="label">E-mail</span>
