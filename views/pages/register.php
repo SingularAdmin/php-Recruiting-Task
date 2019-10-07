@@ -11,7 +11,7 @@
 		<input type="text" class="form-control" name="username" placeholder="Όνομα Χρήστη">
 	</div>
 	<div class="form-group">
-		<span class="label label-primary">Κωρικός</span>
+		<span class="label label-primary">Κωδικός</span>
 		<input type="Password" class="form-control" name="passwd" placeholder="Κωδικός">
 	</div>
 	<div class="form-group">
@@ -25,8 +25,24 @@
 
 	<div id="Roles"></div>
 	<BR>
+	<script type="text/javascript">
+			let selected = [];
+			setRoles();
+			$('#Roles').change(function() {
+			selected = getSelectedRoles();
+			//alert(JSON.stringify(selected));
+		});
+			/*
+			$(setRoles()).promise().done(function(){
+				selected = getSelectedRoles();
+				alert(selected);
+			});
+			*/
+			jsonObj = JSON.stringify(selected);
+		
+			
+ 	</script>
+ 	
+ 	<input type="hidden" name="selectedRoles" value=jsonObj/>
 	<button type="submit" class="btn btn-primary">Submit</button>
-		<script type="text/javascript">
-			getRoles();
- 	 	</script>
 <?php echo form_close(); ?>

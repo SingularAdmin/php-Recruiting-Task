@@ -4,7 +4,11 @@
 			$this->load->database();
 		}
 
-		public function create_user(){
+		public function create_user(){ //inserting new users
+			$data = $this->input->post("selectedRoles");
+			return json_encode($data);
+
+			/*
 			$this->db->trans_start();
 			$this->db->insert('wp_users', array('systemUsers' => 0));
 			$lastID = $this->db->insert_id();
@@ -17,10 +21,23 @@
 			);
 			$data = $this->db->insert('dv_users',$data);
 
-			$this->db->insert('dv_users_roles_has_dv_users',array('dv_users_roles_id' => 1 ,
-				'dv_users_id' => $lastID) );
+			$roledata = setUserRoles($lastID);
+
 			$this->db->trans_complete();
-			return json_encode($data);
+			return json_encode($data)+json_encode($roledata);
+			*/
+		}
+
+		private function setUserRoles($lastID){
+			$JSONdata = $this->input->post('selectedRoles');
+			$data = json_decode($JSONdata);
+			foreach($data as $role){
+				$data = $this->db->insert('dv_users_roles_has_dv_users',array('dv_users_roles_id' => $role+1 ,
+				'dv_users_id' => $lastID) );
+
+			}
+			return var_dump($data);
+			
 		}
 
 		public function read_user($id){
