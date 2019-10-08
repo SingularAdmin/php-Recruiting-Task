@@ -1,8 +1,5 @@
 <?php 
 	class Users extends CI_Controller{
-		public function testinsert(){
-			$this->User_model->insertwp();
-		}
 		public function create(){
 			$data['title'] = 'Sign Up';
 
@@ -17,8 +14,8 @@
 				$this->load->view('pages/register', $data);
 				$this->load->view('templates/footer');
 			}else{
-				redirect("show_users");
-				return $data = $this->User_model->create_user();
+				$data = $this->User_model->create_user();
+				echo $data;
 			}
 		}
 

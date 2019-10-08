@@ -31,6 +31,8 @@
 			$('#Roles').change(function() {
 			selected = getSelectedRoles();
 			//alert(JSON.stringify(selected));
+			jsonObj = JSON.stringify(selected);
+			$("#postRoles").val(jsonObj);
 		});
 			/*
 			$(setRoles()).promise().done(function(){
@@ -38,11 +40,10 @@
 				alert(selected);
 			});
 			*/
-			jsonObj = JSON.stringify(selected);
-		
+			
 			
  	</script>
- 	
- 	<input type="hidden" name="selectedRoles" value=jsonObj/>
+
+ 	<input id="postRoles" type="hidden" name="selectedRoles"/>
 	<button type="submit" class="btn btn-primary">Submit</button>
 <?php echo form_close(); ?>
