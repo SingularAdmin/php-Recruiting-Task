@@ -11,7 +11,7 @@
     
   </tbody>
 </table>
-<p id="usersTable"></p>
+<p id="usersP"></p>
 <script type="text/javascript">
   displayUsers();
 </script>

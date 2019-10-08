@@ -30,7 +30,6 @@
 			setRoles();
 			$('#Roles').change(function() {
 			selected = getSelectedRoles();
-			//alert(JSON.stringify(selected));
 			jsonObj = JSON.stringify(selected);
 			$("#postRoles").val(jsonObj);
 		});
