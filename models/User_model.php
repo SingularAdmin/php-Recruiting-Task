@@ -4,7 +4,7 @@
 			$this->load->database();
 		}
 
-		public function create_user(){ //inserting new users
+		public function create_user(){ //inserting new users with roles
 			$this->db->trans_start();
 			$this->db->insert('wp_users', array('systemUsers' => 0));
 			$lastID = $this->db->insert_id();
@@ -25,18 +25,19 @@
 
 			}
 			$this->db->trans_complete();
-			return json_encode($data) . json_encode($dataR);
+			return json_encode($arrayName = array('UserError' => $data,'RoleError' => $dataR));
 		}
 
 		
 
-		public function read_user($id){
+		public function read_user(){
+			$users = array();
 			$this->db->trans_start();
-			$data = $this->db->query('SELECT * FROM dv_users');
-			$this->db->where("id",$id);
-			$result = $data->result();
+			$this->db->SELECT("id , name");
+			$this->db->FROM("dv_users");
+			$dataU = $this->db->get();
 			$this->db->trans_complete();
-			return json_encode($result);  
+			return json_encode($dataU->result_array()); 
 		}
 
 		public function update_user($id){
@@ -60,27 +61,13 @@
 		}
 
 
-		public function read_All(){ //displaing dv_user name and dv_user_role name
-			/*SELECT dvu.name, dvr.name FROM dv_users as dvu JOIN dv_users_roles_has_dv_users as uhasr ON dvu.id = uhasr.dv_users_id JOIN dv_users_roles as dvr ON
-			uhasr.dv_users_roles_id = dvr.id
-
-
-			$Usersdata = $this->db->select('name')->FROM("dv_users")->get_compiled_select();
-			$Rolesdata = $this->db->select('name')->FROM("dv_users_roles")->get_compiled_select();
-
-			$query = $this->db->query($Usersdata . ' UNION ' .$Rolesdata);
-			if($query->num_rows() > 0){
-				return json_encode($query->result());
-			}else{
-				return json_encode("No data in the table");
-			}
-			*/
+		public function read_All(){ //displaing dv_user name and dv_user_role name /relational data 1 -> *
 			$this->db->trans_start();
 				$query = $this->db->query("SELECT dvu.name as dvuName, dvr.name as  dvrName FROM dv_users as dvu JOIN dv_users_roles_has_dv_users as uhasr ON dvu.id = uhasr.dv_users_id JOIN dv_users_roles as dvr ON
 					uhasr.dv_users_roles_id = dvr.id");
 				$data = array();
 				foreach ($query->result_array() as $index=>$row) {
-					$data[$index] = ($row['dvuName'] . $row['dvrName']);
+					$data[$index] = array('dvuName' => $row['dvuName'] , 'dvrName' => $row['dvrName']);
 				}
 
 			$this->db->trans_complete();

@@ -1,4 +1,6 @@
-<p id="testP"></p> <!-- PAGE FOR DEBUGGING-->
+<table id="testP"></teable> <!-- PAGE FOR DEBUGGING-->
+
 <script type="text/javascript">
-  displayUsers();
+  //displayUsers();
+
 </script>

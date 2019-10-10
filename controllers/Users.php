@@ -15,13 +15,12 @@
 				$this->load->view('templates/footer');
 			}else{
 				$data = $this->User_model->create_user();
-				echo $data;
+				redirect('displayJSON');
 			}
 		}
 
 		public function read(){
-			$data = $this->User_model->read_All();
-			echo json_encode($data);
+			echo $data = json_encode($this->User_model->read_All());
 		}
 
 		public function update(){
